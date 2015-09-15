@@ -43,15 +43,32 @@ $ python de_mo.py
 ```
 
 #### Get DeMo on NGINX
-*****
-
-1. Set up a digital ocean droplet (or whatever equivalent you prefer)
+1. Set up a digital ocean droplet (or whatever equivalent you prefer) and ssh into it
+  - `ssh root@<ip.address.of.droplet>`
 
 2. Install NGINX in one of the following ways:
   - use a distributed package from ubuntu or linux (etc, etc)
     ` apt-get install nginx`
-  - build from the  [source](http://wiki.nginx.org/Install#Building_Nginx_From_Source)
-  - clone the official [docker image](https://blog.docker.com/2015/04/tips-for-deploying-nginx-official-image-with-docker/)
 
+
+#### Get DeMo on NGINX with Docker Images 
+*****
+
+1. Set up a digital ocean droplet (or whatever equivalent you prefer) and ssh into it
+  - `ssh root@<ip.address.of.droplet>`
+
+2. Install [Docker](https://docs.docker.com/installation/ubuntulinux/)
+
+3. Clone the official [docker image](https://blog.docker.com/2015/04/tips-for-deploying-nginx-official-image-with-docker/)
+    - create an instance of the nginx docker image
+    ```
+    $ docker run --name de_mo_nginx -P -d nginx
+    ```
+    you should see output that ends with something like:
+    `
+    5323c06b75dc9378b702e54059485cdedefb92c9511a05b9e4cac4462f20b863
+    `
+
+     You can check to see that nginx is running by navigating in a browser to the ip address of your droplet with the port number randomly picked by the docker image (which you can find by running `docker ps`)
 
 * Unleash onto the internet
