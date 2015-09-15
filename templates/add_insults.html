@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-<h3>Got any vaguely insulting tidbits to
-  show your developer friends their new app probably isn't the next facebook? </h3>
+<h4>Got any vaguely insulting tidbits to
+  show your developer friends their new app probably isn't the next facebook? </h4>
 <form action="{{ url_for('add_insults') }}" method="post" class="add-insult">
   <dl>
     <dt>Insult:
     <dd><textarea name="insult" rows="5" cols="40"></textarea>
-    <dd><input type="submit" value="Submit">
+    <dd><button class="btn waves-effect waves-light btn-large teal lighten-2 red-text text-lighten-2" type="submit" name="action"><center>submit
+    </center><i class="large material-icons right">submit</i>
   </dl>
 </form>
 {% endblock %}
