@@ -64,6 +64,12 @@
   ```
   $ sqlite3 /tmp/de_mo.db < schema.sql
   ```
+  initialize the database in an interactive python shell
+  ```
+  & python
+  >>> from de_mo import init_db
+  >>> init_db()
+  ```
 
 * Run the script from the project directory
 
