@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-<h3>I hear you've got a new app idea.<h3>
+<h5>I hear you've got a new app idea.<h5>
   <form action="{{ url_for('de_motivate')}}" method="POST">
     <dl>
       <dt> What's your name?
         <dd><input type="text" name="name">
-        <dd><input type="submit" value="Demotivate Me"
+        <dd><button class="btn waves-effect waves-light btn-large teal lighten-4" type="submit" name="action">DeMotivate me!
+          <i class="large material-icons right">trending_down</i>
+        </button>
     <dl>
   </form>
 {% endblock %}
