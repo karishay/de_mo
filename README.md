@@ -45,8 +45,13 @@ $ python de_mo.py
 #### Get DeMo on NGINX
 *****
 
-* Install NGINX
+1. Set up a digital ocean droplet (or whatever equivalent you prefer)
 
-`maybe use some code`
+2. Install NGINX in one of the following ways:
+  - use a distributed package from ubuntu or linux (etc, etc)
+    ` apt-get install nginx`
+  - build from the  [source](http://wiki.nginx.org/Install#Building_Nginx_From_Source)
+  - clone the official [docker image](https://blog.docker.com/2015/04/tips-for-deploying-nginx-official-image-with-docker/)
+
 
 * Unleash onto the internet
