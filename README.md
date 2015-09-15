@@ -43,15 +43,25 @@ $ python de_mo.py
 ```
 
 #### Get DeMo on NGINX
-1. Set up a digital ocean droplet (or whatever equivalent you prefer) and ssh into it
-  - `ssh root@<ip.address.of.droplet>`
+********
 
-2. Install NGINX in one of the following ways:
-  - use a distributed package from ubuntu or linux (etc, etc)
-    ` apt-get install nginx`
+1. Set up a server that will serve your web app (I am using DigitalOcean) and ssh into it
+  - `$ ssh root@<ip.address.of.server>`
+
+2. Prep your shiny new server
+  - `$ sudo apt-get update`
+  - install the base dependencies you'll need for your application (in my case it's:)
+    - `$ sudo ap-get install python-pip python-dev `
+  - install nginx
+    - `$ sudo apt-get install nginx`
+
+3. Clone your app code and install any dependencies
+  - I use virtualenv to keep track of dependencies
+    - `$ sudo pip install virtualenv`
+  - 
 
 
-#### Get DeMo on NGINX with Docker Images 
+#### Get DeMo on NGINX with Docker Images
 *****
 
 1. Set up a digital ocean droplet (or whatever equivalent you prefer) and ssh into it
