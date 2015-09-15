@@ -7,23 +7,50 @@
 
 
 * Clone this repo
-```
-$ git clone https://github.com/karishay/de_mo.git
-```
+
+  ```
+  $ git clone https://github.com/karishay/de_mo.git
+  ```
+
+* Create a virturalenv
+
+  ```
+  $ pip install virturalenv
+  $ virtualenv de_mo
+  $ source de_mo/bin/activate
+  $ pip install -r /<path>/<to>/requirements.txt
+  ```
 
 * In the project directory, create a config file (in which we hide our secrets!)
-```
-$ touch de_mo_config.cfg
-```
 
-* Add your secrets to **de_mo_config.cfg**:
-```
-DATABASE='/<path>/<to>/<database_file>/de_mo.db'
-SECRET_KEY='something_super_secret'
-DEBUG=True
-USERNAME='a_name_for_a_user'
-PASSWORD='don't_make_it_password'
-```
+  ```
+  $ touch de_mo_config.cfg
+  ```
+
+* Add your secrets to *de_mo_config.cfg*
+
+  ```
+  DATABASE='/<path>/<to>/<database_file>/de_mo.db'
+  SECRET_KEY='something_super_secret'
+  DEBUG=True
+  USERNAME='a_name_for_a_user'
+  PASSWORD='don't_make_it_password'
+  ```
+
+* Hide your secrets from github:
+
+  ```
+  $ vi .gitignore
+  ```
+  add *de_mo_config.cfg* to your *.gitignore*
+
+  ```
+  de_mo_config.cfg
+  ~
+  ~
+  -- INSERT --
+  :wq!
+  ```
 
 * In your terminal, tell your computer where to find your secrets.
 
@@ -33,14 +60,16 @@ PASSWORD='don't_make_it_password'
 
 * Then pipe the schema file into the sqlite3 database
   (make sure you have the path correct!)
-```
-$ sqlite3 /tmp/de_mo.db < schema.sql
-```
+
+  ```
+  $ sqlite3 /tmp/de_mo.db < schema.sql
+  ```
 
 * Run the script from the project directory
-```
-$ python de_mo.py
-```
+
+  ```
+  $ python de_mo.py
+  ```
 
 #### Get DeMo on NGINX
 ********
@@ -51,14 +80,30 @@ $ python de_mo.py
 2. Prep your shiny new server
   - `$ sudo apt-get update`
   - install the base dependencies you'll need for your application (in my case it's:)
-    - `$ sudo ap-get install python-pip python-dev `
+    - `$ sudo apt-get install python-pip python-dev `
+    - `$ sudo apt-get install git`
   - install nginx
     - `$ sudo apt-get install nginx`
 
 3. Clone your app code and install any dependencies
   - I use virtualenv to keep track of dependencies
     - `$ sudo pip install virtualenv`
-  - 
+  - get your [application](#install) installed
+  - install uWSGI and create a WSGI entry point
+    - `$ pip install uwsgi`
+    - create a *de_mo/wsgi.py* file
+      - `$ vi de_mo/wsgi.py`
+      - add the following to *wsgi.py*
+      - ```
+        from de_mo import de_mo
+
+        if __name__ == "__main__":
+        application.run()
+      ```
+      - save and close *wsgi.py*
+
+4. Configure uWSGI server
+  - check that uWSGI is running (stuff gets weird here watch out)
 
 
 #### Get DeMo on NGINX with Docker Images

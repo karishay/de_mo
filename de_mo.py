@@ -40,11 +40,9 @@ def index():
 @app.route('/', methods=['POST'])
 def de_motivate():
     name = request.form['name']
-    print name
     query_results = g.db.execute('SELECT words, too_mean from De_mos')
     insults = [dict(words=row[0], too_mean=row[1]) for row in query_results.fetchall()]
     random_insult= random.choice(insults)['words']
-    print "something"
     return render_template('de_motivation.html', name=name, insult=random_insult)
 
 
@@ -62,4 +60,4 @@ def add_insults():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
