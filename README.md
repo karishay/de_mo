@@ -150,6 +150,7 @@
     chdir /root/de_mo
     exec uwsgi --ini de_mo.ini
   ```
+  
 
 
 #### Get DeMo on NGINX with Docker Images
