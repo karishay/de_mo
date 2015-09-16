@@ -87,17 +87,17 @@
   - install uWSGI and create a WSGI entry point
     - `$ pip install uwsgi`
     - in your project directory create a *wsgi.py* file
-      - ```
+        ```
         $ cd /<path>/<to>/de_mo
         $ vi wsgi.py
         ```
-      - add the following to *wsgi.py*
-      - ```
-        from de_mo import app
+    - add the following to *wsgi.py*
+      ```
+      from de_mo import app
 
-        if __name__ == "__main__":
-          app.run(host='0.0.0.0')
-        ```
+      if __name__ == "__main__":
+        app.run(host='0.0.0.0')
+      ```
 
 4. Configure uWSGI server
   - make sure your virtualenv is activated
