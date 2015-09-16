@@ -38,26 +38,17 @@
   PASSWORD='don't_make_it_password'
   ```
 
-* Hide your secrets from github:
-
-  ```
-  $ vi .gitignore
-  ```
-  add *de_mo_config.cfg* to your *.gitignore*
-
-  ```
-  de_mo_config.cfg
-  ~
-  ~
-  -- INSERT --
-  :wq!
-  ```
-
 * In your terminal, tell your computer where to find your secrets.
 
- ```
- $ export DE_MO_SETTINGS=/<path_to>/<file_you_just_made>/de_mo_config.cfg
- ```
+   ```
+   $ export DE_MO_SETTINGS=/<path_to>/<file_you_just_made>/de_mo_config.cfg
+   ```
+
+* Install sqlite3 (don't judge me...)
+
+  ```
+  $ apt-get install sqlite3
+  ```
 
 * Then pipe the schema file into the sqlite3 database
   (make sure you have the path correct!)
@@ -65,12 +56,15 @@
   ```
   $ sqlite3 /tmp/de_mo.db < schema.sql
   ```
-  initialize the database in an interactive python shell
+
+<!-- TODO: Shouldn't the init script do this? -->
+  <!-- initialize the database in an interactive python shell
+
   ```
   & python
   >>> from de_mo import init_db
   >>> init_db()
-  ```
+  ``` -->
 
 * Run the script from the project directory
 
@@ -95,7 +89,10 @@
 3. Clone your app code and install any dependencies
   - I use virtualenv to keep track of dependencies
     - `$ sudo pip install virtualenv`
+
   - get your [application](#install) installed
+    - deactivate your virtualenv with `$ deactivate`
+    
   - install uWSGI and create a WSGI entry point
     - `$ pip install uwsgi`
     - create a *de_mo/wsgi.py* file
