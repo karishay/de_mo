@@ -74,7 +74,7 @@
   - install the base dependencies you'll need for your application (in my case it's:)
     - `$ sudo apt-get install python-pip python-dev `
     - `$ sudo apt-get install git`
-  - install nginx
+  - install nginx TODO: Add directions for installing latest mainline version
     - `$ sudo apt-get install nginx`
 
 3. Clone your app code and install any dependencies
@@ -113,7 +113,9 @@
   - deactivate your virtualenv with `$ deactivate`
 
   - create a uWSGI configuration file called *de_mo.ini* in your app directory
+
     `$ vi ~/de_mo/de_mo.ini`
+
     add the following settings to your uWSGI configuration
     ```
     [uwsgi]
@@ -131,8 +133,10 @@
 
 5. Create an Upstart Script
   - `$ vi /etc/init/de_mo.conf`
+
   add the following to your Upstart script
-  ```
+
+    ```
     # a description of your Upstart Script
     description "uWSGI server configured to serve de_mo"
 
@@ -148,7 +152,7 @@
     env PATH=$PATH:/root/de_mo/bin
     chdir /root/de_mo
     exec uwsgi --ini de_mo.ini
-  ```
+    ```
   save and close file then run it with
   `start de_mo`
 
