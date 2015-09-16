@@ -150,7 +150,26 @@
     chdir /root/de_mo
     exec uwsgi --ini de_mo.ini
   ```
-  
+  save and close file then run it with
+  `start de_mo`
+
+6. Configure NGINX
+  - Add a new configuration file to the */etc/nginx/conf.d/* directory
+  `$ vi /etc/nginx/conf.d/de_mo.conf`
+    - Add a server block directive to your shiny new nginx configuration file
+    ```
+    server {
+      listen 80;
+      server_name <your_ip_address>;
+
+      location / {
+        include uwsgi_params;
+        uwsgi_pass unix:/root/de_mo/de_mo.sock;
+      }
+    }
+    ```
+    - restart NGINX with `service nginx restart`
+    
 
 
 #### Get DeMo on NGINX with Docker Images
