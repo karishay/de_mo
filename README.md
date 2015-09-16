@@ -109,7 +109,47 @@
       - save and close *wsgi.py*
 
 4. Configure uWSGI server
-  - check that uWSGI is running (stuff gets weird here watch out)
+  - check that uWSGI is running
+    `$ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi:app`
+    open a browser with your ip address and port 8000 and you should see your app's index page
+  - deactivate your virtualenv with `deactivate`
+  - create a uWSGI configuration file called *de_mo.ini* in your app directory
+    `$ vi ~/de_mo/de_mo.ini`
+    add the following settings to your uWSGI configuration
+    ```
+      [uwsgi]
+      module = wsgi
+
+      master = true
+      process = 5
+
+      socket = de_mo.sock
+      chmod-socket = 660
+      vaccum = true
+
+      die-on-term = true
+    ```
+
+5. Create an Upstart Script
+  - `$ vi /etc/init/de_mo.conf`
+  add the following to your Upstart script
+  ```
+    # a description of your Upstart Script
+    description "uWSGI server configured to serve de_mo"
+
+    #TODO: explain
+    start on runlevel [2345]
+    stop on runlevel [!2345]
+
+    #TODO: explain
+    setuid root
+    setgid www-data
+
+    # add the location of your env variables to your path  
+    env PATH=$PATH:/root/de_mo/bin
+    chdir /root/de_mo
+    exec uwsgi --ini de_mo.ini
+  ```
 
 
 #### Get DeMo on NGINX with Docker Images
