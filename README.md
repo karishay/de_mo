@@ -82,41 +82,51 @@
     - `$ sudo pip install virtualenv`
 
   - get your [application](#install) installed
-    - deactivate your virtualenv with `$ deactivate`
+    - make sure your virtualenv is activated
 
   - install uWSGI and create a WSGI entry point
     - `$ pip install uwsgi`
-    - create a *de_mo/wsgi.py* file
-      - `$ vi de_mo/wsgi.py`
+    - in your project directory create a *wsgi.py* file
+      - ```
+        $ cd /<path>/<to>/de_mo
+        $ vi wsgi.py
+        ```
       - add the following to *wsgi.py*
       - ```
-        from de_mo import de_mo
+        from de_mo import app
 
         if __name__ == "__main__":
-        application.run()
-      ```
-      - save and close *wsgi.py*
+          app.run(host='0.0.0.0')
+        ```
 
 4. Configure uWSGI server
+  - make sure your virtualenv is activated
+
+    `$ source bin/activate`
+
   - check that uWSGI is running
+
     `$ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi:app`
+
     open a browser with your ip address and port 8000 and you should see your app's index page
-  - deactivate your virtualenv with `deactivate`
+
+  - deactivate your virtualenv with `$ deactivate`
+
   - create a uWSGI configuration file called *de_mo.ini* in your app directory
     `$ vi ~/de_mo/de_mo.ini`
     add the following settings to your uWSGI configuration
     ```
-      [uwsgi]
-      module = wsgi
+    [uwsgi]
+    module = wsgi
 
-      master = true
-      process = 5
+    master = true
+    process = 5
 
-      socket = de_mo.sock
-      chmod-socket = 660
-      vaccum = true
+    socket = de_mo.sock
+    chmod-socket = 666
+    vaccum = true
 
-      die-on-term = true
+    die-on-term = true
     ```
 
 5. Create an Upstart Script
