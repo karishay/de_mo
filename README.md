@@ -24,6 +24,7 @@
 * In the project directory, create a config file (in which we hide our secrets!)
 
   ```
+  $ cd /<path>/<to>/de_mo
   $ touch de_mo_config.cfg
   ```
 
@@ -169,7 +170,7 @@
     }
     ```
     - restart NGINX with `service nginx restart`
-    
+
 
 
 #### Get DeMo on NGINX with Docker Images
