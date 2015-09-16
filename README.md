@@ -57,15 +57,6 @@
   $ sqlite3 /tmp/de_mo.db < schema.sql
   ```
 
-<!-- TODO: Shouldn't the init script do this? -->
-  <!-- initialize the database in an interactive python shell
-
-  ```
-  & python
-  >>> from de_mo import init_db
-  >>> init_db()
-  ``` -->
-
 * Run the script from the project directory
 
   ```
@@ -92,7 +83,7 @@
 
   - get your [application](#install) installed
     - deactivate your virtualenv with `$ deactivate`
-    
+
   - install uWSGI and create a WSGI entry point
     - `$ pip install uwsgi`
     - create a *de_mo/wsgi.py* file
