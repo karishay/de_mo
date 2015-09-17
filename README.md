@@ -1,6 +1,8 @@
 # DeMo: A De-motivational Demo
 
- DeMo is an app to keep your ego in check. It's also a simple Flask-SQL demo app that's styled with [Materialize](http://materializecss.com/). If you'd like to use this demo application to learn how to use uWSGI and NGINX please begin at the "How to Deploy Flask on NGINX with uWSGI" section.
+ DeMo is an app to keep your ego in check. It's also a simple Flask-SQL demo app that's styled with [Materialize](http://materializecss.com/).
+
+ If you'd like to use this demo application to **learn how to use uWSGI and NGINX** start at the **"How to Deploy Flask on NGINX with uWSGI"** section.
 
 ### Install DeMo App
 *****
