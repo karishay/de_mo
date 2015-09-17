@@ -4,27 +4,27 @@ from flask import Flask, request, redirect, url_for
 from flask import render_template, flash, g
 from contextlib import closing
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-app.config.from_envvar('DE_MO_SETTINGS', silent=True)
+application.config.from_envvar('DE_MO_SETTINGS', silent=True)
 
 
 #========# Database #==========#
 
 def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
+    return sqlite3.connect(application.config['DATABASE'])
 
 def init_db():
     with closing(connect_db()) as db:
-        with app.open_resource('schema.sql', mode='r') as f:
+        with application.open_resource('schema.sql', mode='r') as f:
             db.cursor().executescript(f.read())
         db.commit()
 
-@app.before_request
+@application.before_request
 def before_request():
     g.db = connect_db()
 
-@app.teardown_request
+@application.teardown_request
 def teardown_request(exception):
     db = getattr(g, 'db', None)
     if db is not None:
@@ -33,11 +33,11 @@ def teardown_request(exception):
 
 #==========# Routes #==========#
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=['POST'])
+@application.route('/', methods=['POST'])
 def de_motivate():
     name = request.form['name']
     query_results = g.db.execute('SELECT words, too_mean from De_mos')
@@ -46,11 +46,11 @@ def de_motivate():
     return render_template('de_motivation.html', name=name, insult=random_insult)
 
 
-@app.route('/add_insults', methods=['GET'])
+@application.route('/add_insults', methods=['GET'])
 def add_insults_view():
     return render_template('add_insults.html')
 
-@app.route('/add_insults', methods=['POST'])
+@application.route('/add_insults', methods=['POST'])
 def add_insults():
     g.db.execute('insert into De_mos (words) values (?)',
                 [request.form['insult']])
@@ -60,6 +60,6 @@ def add_insults():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    application.run(host='0.0.0.0')
     init_db()
     #TODO: call function that populates the database on load
