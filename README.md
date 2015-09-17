@@ -78,6 +78,7 @@
     - `$ sudo apt-get install nginx`
 
 3. Clone your app code and install any dependencies
+  - make sure to change into /home directory to avoid root permissions issues
   - I use virtualenv to keep track of dependencies
     - `$ sudo pip install virtualenv`
 
@@ -149,8 +150,8 @@
     setgid www-data
 
     # add the location of your env variables to your path  
-    env PATH=$PATH:/root/de_mo/bin
-    chdir /root/de_mo
+    #env PATH=$PATH:/root/de_mo/bin
+    chdir /<path_to_project>/de_mo
     exec uwsgi --ini de_mo.ini
     ```
   save and close file then run it with
@@ -179,7 +180,8 @@
 *****
 
 1. Set up a digital ocean droplet (or whatever equivalent you prefer) and ssh into it
-  - `ssh root@<ip.address.of.droplet>`
+  - `ssh user@<ip.address.of.droplet>`
+  - NOTE: do not use root user. make a new [user](https://www.digitalocean.com/community/tutorials/how-to-set-up-uwsgi-and-nginx-to-serve-python-apps-on-ubuntu-14-04). 
 
 2. Install [Docker](https://docs.docker.com/installation/ubuntulinux/)
 
