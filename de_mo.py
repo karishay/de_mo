@@ -20,6 +20,15 @@ def init_db():
             db.cursor().executescript(f.read())
         db.commit()
 
+def populate_db():
+    default_insults = ["... that's a useless as a box of hair.",
+                        "... at lease your parents will love you.",
+                        "... well.. that's not your best idea."]
+    for insult in default_insults:
+        g.db.execute('insert into De_mos (words) values (?)',
+                    [insult])
+        g.db.commit()
+
 @application.before_request
 def before_request():
     g.db = connect_db()
@@ -35,13 +44,14 @@ def teardown_request(exception):
 
 @application.route('/', methods=['GET'])
 def index():
+    populate_db()
     return render_template('index.html')
 
 @application.route('/', methods=['POST'])
 def de_motivate():
     name = request.form['name']
-    query_results = g.db.execute('SELECT words, too_mean from De_mos')
-    insults = [dict(words=row[0], too_mean=row[1]) for row in query_results.fetchall()]
+    query_results = g.db.execute('SELECT words from De_mos')
+    insults = [dict(words=row[0]) for row in query_results.fetchall()]
     random_insult= random.choice(insults)['words']
     return render_template('de_motivation.html', name=name, insult=random_insult)
 
@@ -62,4 +72,3 @@ def add_insults():
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
     init_db()
-    #TODO: call function that populates the database on load
