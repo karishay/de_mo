@@ -14,25 +14,25 @@
  $ git clone https://github.com/karishay/de_mo.git
  ```
 
-2. Create a virturalenv
+2. Install dependancies in a virturalenv
 
  ```
- $ pip install virturalenv
- $ virtualenv de_mo
- $ source de_mo/bin/activate
+ $ cd de_mo/
+ $ virtualenv de_mo_env
+ $ source de_mo_env/bin/activate
  $ pip install -r /<path>/<to>/requirements.txt
  ```
 
 3. Set your credentials and tell your computer where to find them
  * Create a config file in your project directory
    ```
-   $ cd /<path>/<to>/de_mo
+   $ cd /<path_to_project>/de_mo
    $ vi de_mo_config.cfg
    ```
   * Add your secrets to *de_mo_config.cfg*
 
      ```
-     DATABASE='/<path>/<to>/<database_file>/de_mo.db'
+     DATABASE='/tmp/de_mo.db'
      SECRET_KEY='something_super_secret'
      DEBUG=True
      USERNAME='a_name_for_a_user'
@@ -42,7 +42,7 @@
  * In your terminal, tell your computer where to find your secrets.
 
     ```
-    $ export DE_MO_SETTINGS=/<path_to>/<file_you_just_made>/de_mo_config.cfg
+    $ export DE_MO_SETTINGS=/<path_to_project>/de_mo_config.cfg
     ```
 
 4. Set up your database
@@ -94,24 +94,29 @@
     ```
 
 2. Create a Virtual Environment
+  (NOTE: make sure to install virtualenv outside of your project directory)
   ```
   $ sudo pip install virtualenv
   ```
 
 3. Get your project code
 
-    Activate your virtualenv
+  Follow the installation instructions at the **Install DeMo App** section (or your own app install procedure)
+
+    If you haven't already, create a virtualenv inside your project directory, then activate it and install dependencies.
     ```
+    $ cd <project_dir>
     $ virtualenv project_env
     $ source project_env/bin/activate
+    $ pip install -r requirements.txt
     ```
 
-    Follow the installation instructions at the **Install DeMo App** section (or your own app install procedure)
 
 4. Install uWSGI and create a WSGI entry point
+  (NOTE: You must be inside your project directory and have your virtualenv active)
 
   ```
-  $ sudo pip install uwsgi
+  $ pip install uwsgi
   ```
 
   Create a `wsgi.py` file and include the following:
@@ -229,10 +234,10 @@ Trying to run it with Upstart + uWSGI + NGINX configured and getting a 500 error
     env DE_MO_SETTINGS=/home/<user>/<project>/<project>_config.cfg
     ```
 
-  Got local deploy working but running into issues with uWSGI and NGINX?
-    - What user are you on your server? Did you log in as root and put your project folder + files under the root user directory?
+Got local deploy working but running into issues with uWSGI and NGINX?
+  - What user are you on your server? Did you log in as root and put your project folder + files under the root user directory?
 
-    The root directory has specific permissions and when uWSGI or Upstart tries to access it to set up the server it will run into permissions issues. This is for your protection.
-      - Set up a user for your uWSGI server to use and give it sudo permissions.
-      - Make sure all your project files are in place where this user can access them with correct permissions.
-      - Make sure all your paths have been set correctly in your Upstart script (and everywhere else too)
+  The root directory has specific permissions and when uWSGI or Upstart tries to access it to set up the server it will run into permissions issues. This is for your protection.
+    - Set up a user for your uWSGI server to use and give it sudo permissions.
+    - Make sure all your project files are in place where this user can access them with correct permissions.
+    - Make sure all your paths have been set correctly in your Upstart script (and everywhere else too)
