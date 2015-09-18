@@ -243,8 +243,6 @@ Got local deploy working but running into issues with uWSGI and NGINX?
   - What user are you on your server? Did you log in as root and put your project folder + files under the root user directory?
 
   The root directory has specific permissions and when uWSGI or Upstart tries to access it to set up the server it will run into permissions issues. This is for your protection.
-
-    * Set up a user for your uWSGI server to use and give it sudo permissions.
-
-    * Make sure all your project files are in place where this user can access them with correct permissions.
-    * Make sure all your paths have been set correctly in your Upstart script (and everywhere else too)
+      - Set up a user for your uWSGI server to use and give it sudo permissions.  
+      - Make sure all your project files are in place where this user can access them with correct permissions
+      - Make sure all your paths have been set correctly in your Upstart script (and everywhere else too)
