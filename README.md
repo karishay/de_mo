@@ -176,7 +176,9 @@
   setuid user
   setgid www-data
 
-  env PATH=/home/user/project/projectenv/bin
+  env PATH=$PATH:/home/user/project/projectenv/bin
+  env DE_MO_SETTINGS=/home/<user>/<project>/<project>_config.cfg
+
   chdir /home/user/project
   exec uwsgi --ini project.ini
   ```
@@ -201,7 +203,7 @@
   }
   ```
 
-  restart NGINX with `service nginx restart`
+  restart NGINX with ` sudo service nginx restart`
 
 ### Debugging Hints
 *****
@@ -222,6 +224,9 @@ Trying to test uWSGI is working but getting an error saying no application found
         `$ uwsgi --socket 0.0.0.0:8000 --protocol=http -w wsgi:<callable_name>`
         And let your upstart script know the *callable* name by adding this line to the `<project>.ini` script
         `callable = app`
+
+Trying to test uWSGI is working but getting an error that it can't find flask (not recognizing your virtualenv)?
+  - uWSGI must be installed AFTER you have activated your virtualenv
 
 
 Trying to run it with Upstart + uWSGI + NGINX configured and getting a 500 error?
