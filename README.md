@@ -93,6 +93,8 @@
     $ sudo apt-get install nginx
     ```
 
+    Follow these instructions to update your version of NGINX to the most recent version [NGINX](https://www.nginx.com/resources/wiki/start/topics/tutorials/install/) 
+
 2. Create a Virtual Environment
   (NOTE: make sure to install virtualenv outside of your project directory)
   ```

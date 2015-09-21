@@ -22,7 +22,7 @@ def init_db():
 
 def populate_db():
     default_insults = ["... that's a useless as a box of hair.",
-                        "... at lease your parents will love you.",
+                        "... at least your parents will love you.",
                         "... well.. that's not your best idea."]
     for insult in default_insults:
         g.db.execute('insert into De_mos (words) values (?)',
